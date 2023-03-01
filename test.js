@@ -28,10 +28,10 @@
 
 
 const data = [{user:1},{user:2},{user:3},{user:4},{user:5}]
-const count = data.count();
+const count = data.length
 console.log(count);
 var pageSize = 2
-var pageNumber = 1
+var pageNumber = 3
 var skip = (pageNumber - 1)* pageSize
 
 var result = data.slice(skip, skip + pageSize)

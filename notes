@@ -1,35 +1,24 @@
-{
-    "users":[
-        {
-            "name": "javedpatel",
-            "phone": 9134587961,
-            "email": "osamapate@gmail.com",
-            "dob": "29-7-2000",
-            "password": "1012154And",
-            "address": "sakinaka"
-        },
-        {
-            "name": "javedpatel",
-            "phone": 9134587961,
-            "email": "javed1@gmail.com",
-            "dob": "29-7-2000",
-            "password": "1012154And",
-            "address": "sakinaka"
-        },
-        {
-            "name": "javedpatel",
-            "phone": 9134587961,
-            "email": "javed2@gmail.com",
-            "dob": "29-7-2000",
-            "password": "1012154And",
-            "address": "sakinaka"
-        },
-        {
-            "name": "javedpatel",
-            "phone": 9134587961,
-            "email": "javed3@gmail.com",
-            "dob": "29-7-2000",
-            "password": "1012154And",
-            "address": "sakinaka"
-        }]
-}
+
+    async function RecursiveInsert(url) {
+          const bulk = result.map((item) => {
+            return {
+              insertOne: {
+                document: {
+                  name: item.name,
+                  url: item.url,
+                },
+              },
+            };
+
+
+          await myModel3.bulkWrite(bulk);
+
+
+      totoalPages--;
+      if (totoalPages === 0) {
+        res.status(200).send("Done");
+        return;
+      }
+      RecursiveInsert(next)
+    }
+    RecursiveInsert(url);
