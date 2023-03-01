@@ -1,12 +1,12 @@
 const Customer = require("../../Models/customerSchema");
 
-readCustomerHandler = async (req, res) => {
+readCustomer = async (req, res) => {
   try {
     const result = await Customer.find();
-    res.send(result);
+    res.status(200).send(result);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).send({ message: err.message });
   }
 };
 
-module.exports = readCustomerHandler;
+module.exports = readCustomer;

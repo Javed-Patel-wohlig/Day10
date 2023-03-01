@@ -1,7 +1,6 @@
-const mongoose = require("../../Config/config");
-const updateCustomerHandler = require("../../Controller/Customer_info/updateCustomer");
+const updateCustomer = require("../../Controller/Customer_info/updateCustomer");
 const router = require("express").Router();
 
-router.put("/", updateCustomerHandler);
+router.put("/", updateCustomer);
 
 module.exports = router;

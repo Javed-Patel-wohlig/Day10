@@ -1,19 +1,18 @@
 const Customer = require("../../Models/customerSchema");
 
-updateCustomerHandler = async (req, res) => {
+updateCustomer = async (req, res) => {
   try {
-    let name = req.body.email;
-    let existingCustomer = await Customer.findOne({ email: name });
+    let id = req.body.id;
+    let existingCustomer = await Customer.findOne({ _id: id });
 
-    if(!existingCustomer) return res.status(404).json({ message: "Customer not found" });
+    if (!existingCustomer)
+      return res.status(404).send({ message: "Customer not found" });
 
-    existingCustomer = await Customer.updateOne({ email: name},req.body)
-    let CustomerDetails = await Customer.findOne({ email: name});
-    res.json({CustomerDetails,message:"updated successfully"});
-
+    existingCustomer = await Customer.updateOne({ _id: id }, req.body);
+    res.status(200).send({ message: "updated successfully" });
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).send({ message: err.message });
   }
 };
 
-module.exports = updateCustomerHandler;
+module.exports = updateCustomer;

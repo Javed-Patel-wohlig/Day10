@@ -1,19 +1,18 @@
 const Customer = require("../../Models/customerSchema");
-const _ = require("lodash");
 
 createCustomer = async (req, res) => {
   try {
-    let name = req.body.email;
-    const existingProduct = await Customer.findOne({ email: name });
+    let email = req.body.email;
+    const existingProduct = await Customer.findOne({ email: email });
 
     if (existingProduct)
-      return res.status(409).json({ message: "Customer already exists" });
+      return res.status(409).send({ message: "Customer already exists" });
 
     let customer = new Customer(req.body);
     customer = await customer.save();
-    res.send(customer);
+    res.status(200).send({message: "Created Customer successfully"});
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).send({ message: err.message });
   }
 };
 

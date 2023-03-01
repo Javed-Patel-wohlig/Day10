@@ -1,17 +1,18 @@
 const Customer = require("../../Models/customerSchema");
-deleteCustomerHandler = async (req, res) => {
+
+deleteCustomer = async (req, res) => {
   try {
-    let name = req.body.email;
-    let existingCustomer = await Customer.findOne({ email: name });
+    let id = req.body.id;
+    let existingCustomer = await Customer.findOne({ _id: id });
 
     if (!existingCustomer)
-      return res.status(404).json({ message: "Customer not found" });
+      return res.status(404).send({ message: "Customer not found" });
 
-    await Customer.deleteOne({ email: name });
-    res.json({ existingCustomer, message: "deleted successfully" });
+    await Customer.deleteOne({ _id: id });
+    res.json({message: "deleted successfully" });
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).send({ message: err.message });
   }
 };
 
-module.exports = deleteCustomerHandler;
+module.exports = deleteCustomer;

@@ -1,16 +1,16 @@
 const Product = require("../../Models/productSchemas");
 deleteProductHandler = async (req, res) => {
   try {
-    let name = req.body.productId;
-    let existingProduct = await Product.findOne({ productId: name });
+    let id = req.body.id;
+    let existingProduct = await Product.findOne({ _id: id });
 
     if (!existingProduct)
-      return res.status(404).json({ message: "Product not found" });
+      return res.status(404).send({ message: "Product not found" });
 
-    await Product.deleteOne({ productId: name });
-    res.json({existingProduct, message: "deleted successfully" });
+    await Product.deleteOne({ _id: id });
+    res.status(200).send({existingProduct, message: "deleted successfully" });
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).send({ message: err.message });
   }
 };
 
